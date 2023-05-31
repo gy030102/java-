@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/11.0.18">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/WindStation/.p2/pool/plugins/org.eclipse.osgi_3.18.100.v20220817-1601.jar" sourcepath="D:/college/javaEclipse/eclipse-java-2023-03-R-win32-x86_64/eclipse/plugins/org.eclipse.osgi_3.18.300.v20230220-1352.jar"/>
 	<classpathentry kind="lib" path="C:/Users/WindStation/.p2/pool/plugins/org.eclipse.core.commands_3.10.200.v20220512-0851.jar" sourcepath="D:/college/javaEclipse/eclipse-java-2023-03-R-win32-x86_64/eclipse/plugins/org.eclipse.core.commands_3.10.400.v20230220-0932.jar"/>
 	<classpathentry kind="lib" path="C:/Users/WindStation/.p2/pool/plugins/org.eclipse.equinox.common_3.16.200.v20220817-1601.jar" sourcepath="D:/college/javaEclipse/eclipse-java-2023-03-R-win32-x86_64/eclipse/plugins/org.eclipse.equinox.common_3.17.100.v20230202-1341.jar"/>
@@ -18,5 +23,6 @@
 	<classpathentry kind="lib" path="C:/Users/WindStation/.p2/pool/plugins/org.eclipse.ui.workbench_3.126.0.v20220823-0718.jar" sourcepath="D:/college/javaEclipse/eclipse-java-2023-03-R-win32-x86_64/eclipse/plugins/org.eclipse.ui.workbench_3.128.0.v20230220-1021.jar"/>
 	<classpathentry kind="lib" path="C:/Users/WindStation/.p2/pool/plugins/com.ibm.icu_72.1.0.v20221115-2007.jar" sourcepath="D:/college/javaEclipse/eclipse-java-2023-03-R-win32-x86_64/eclipse/plugins/com.ibm.icu_72.1.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/WindStation/.p2/pool/plugins/org.eclipse.ui.forms_3.11.400.v20220817-1444.jar" sourcepath="D:/college/javaEclipse/eclipse-java-2023-03-R-win32-x86_64/eclipse/plugins/org.eclipse.ui.forms_3.11.600.v20230220-0932.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/mysql"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -18,7 +18,7 @@ public class DBOperation {
 //	public static ResultSet result = null;
 
 	// 查询语句
-	public ResultSet query(String sqlQuery) {
+	public static ResultSet query(String sqlQuery) {
 		ResultSet result = null;
 		try {
 			result = statement.executeQuery(sqlQuery);
@@ -31,7 +31,7 @@ public class DBOperation {
 
 	// 更新语句
 	// 返回值为发生变更的行数
-	public int update(String sqlUpdate) {
+	public static int update(String sqlUpdate) {
 		int res = 0; // 更新的行数
 		try {
 			res = statement.executeUpdate(sqlUpdate);
@@ -47,6 +47,7 @@ public class DBOperation {
 		try {
 			Class.forName(DRIVERNAME);
 			connection = DriverManager.getConnection(CONNECTION_URL, DBUSER_ID, DBPASSWORD);
+			statement.executeUpdate("use goodsinventory");
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

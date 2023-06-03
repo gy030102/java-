@@ -1,6 +1,6 @@
-package control;
+package src.control;
 
-import configuration.DBOperation;
+import src.configuration.DBOperation;
 
 public class Management {
 	private static DBOperation dbOperation;

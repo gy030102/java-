@@ -1,4 +1,4 @@
-package configuration;
+package src.configuration;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,10 +1,10 @@
-package service;
+package src.service;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import configuration.DBOperation;
-import model.User;
+import src.configuration.DBOperation;
+import src.model.User;
 
 public class UserService {
 

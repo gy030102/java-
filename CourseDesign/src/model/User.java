@@ -1,20 +1,22 @@
-package src.model;
+package model;
 
 public class User {
-	
+
 	private String name;
-	
+
 	private int id;
-	
+
 	private int phone;
 
-	User(String name,int id,int phone){
+	public User() {
+	}
+
+	public User(String name, int id, int phone) {
 		this.id = id;
 		this.name = name;
-		this.phone=phone;
+		this.phone = phone;
 	}
-	
-	
+
 	public String getName() {
 		return name;
 	}
@@ -23,8 +25,6 @@ public class User {
 		this.name = name;
 	}
 
-	
-	
 	public int getId() {
 		return id;
 	}
@@ -33,8 +33,6 @@ public class User {
 		this.id = id;
 	}
 
-	
-	
 	public int getPhone() {
 		return phone;
 	}
@@ -42,6 +40,5 @@ public class User {
 	public void setPhone(int phone) {
 		this.phone = phone;
 	}
-	
-	
+
 }

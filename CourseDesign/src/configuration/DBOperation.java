@@ -8,13 +8,13 @@ import java.sql.Statement;
 
 public class DBOperation {
 
-	public static final String DRIVERNAME = "com.mysql.cj.jdbc.Driver";
-	public static final String CONNECTION_URL = "jdbc:mysql://mysql.sqlpub.com:3306/?serverTimezone=UTC";
-	public static final String DBUSER_ID = "windstation";
-	public static final String DBPASSWORD = "c7ce4b64145e1872";
+	private static final String DRIVERNAME = "com.mysql.cj.jdbc.Driver";
+	private static final String CONNECTION_URL = "jdbc:mysql://mysql.sqlpub.com:3306/?serverTimezone=UTC";
+	private static final String DBUSER_ID = "windstation";
+	private static final String DBPASSWORD = "c7ce4b64145e1872";
 
-	public static Connection connection = null;
-	public static Statement statement = null;
+	private static Connection connection = null;
+	private static Statement statement = null;
 //	public static ResultSet result = null;
 
 	// 查询语句
@@ -43,7 +43,8 @@ public class DBOperation {
 	}
 
 	// 构造时建立连接
-	public DBOperation() {
+//	public DBOperation()
+	static {
 		try {
 			Class.forName(DRIVERNAME);
 			connection = DriverManager.getConnection(CONNECTION_URL, DBUSER_ID, DBPASSWORD);

@@ -44,10 +44,11 @@ public class DBOperation {
 
 	// 构造时建立连接
 //	public DBOperation()
-	static {
+	public static void init() {
 		try {
 			Class.forName(DRIVERNAME);
 			connection = DriverManager.getConnection(CONNECTION_URL, DBUSER_ID, DBPASSWORD);
+			statement = connection.createStatement();
 			statement.executeUpdate("use goodsinventory");
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block

@@ -1,11 +1,13 @@
 package model;
 
-// 对应数据库表administratorinfo，管理员
-public class Manager {
+// 对应数据库表operatorinfo，操作员
+public class Operator {
 
 	private String name;
 
 	private String id;
+
+//	private String gender;
 
 	private String password;
 
@@ -25,6 +27,14 @@ public class Manager {
 		this.id = id;
 	}
 
+//	public String getGender() {
+//		return gender;
+//	}
+//
+//	public void setGender(String gender) {
+//		this.gender = gender;
+//	}
+
 	public String getPassword() {
 		return password;
 	}
@@ -33,21 +43,10 @@ public class Manager {
 		this.password = password;
 	}
 
-	public Manager(String id, String name, String password) {
+	public Operator(String id, String name, String password) {
 		this.id = id;
 		this.name = name;
 		this.password = password;
 	}
 
-	public void in(Goods goods, int num) {
-		goods.setAmount(goods.getAmount() + num);
-	}
-
-	public void out(Goods goods, int num) {
-		if (goods.getAmount() < num)
-			System.out.println("库存不足！");
-		else
-			goods.setAmount(goods.getAmount() - num);
-
-	}
 }

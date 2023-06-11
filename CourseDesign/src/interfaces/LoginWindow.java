@@ -6,9 +6,16 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.SWTResourceManager;
+
+import control.Index;
+import model.Manager;
+import model.Operator;
+import service.ManagerService;
+import service.OperatorService;
 
 public class LoginWindow {
 
@@ -76,6 +83,33 @@ public class LoginWindow {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				// 操作员登录按钮事件
+				String loginId = loginId_text.getText();
+				if (OperatorService.find(loginId) == null) {
+					MessageBox box = new MessageBox(shell, SWT.NONE);
+					box.setText("提示");
+					box.setMessage("该操作员不存在，请检查后重新输入！");
+					box.open();
+					loginId_text.setText("");
+					loginPW_text.setText("");
+					return;
+				}
+				Operator operator = OperatorService.find(loginId);
+				String pw = loginPW_text.getText();
+				if (!pw.equals(operator.getPassword())) {
+					MessageBox box = new MessageBox(shell, SWT.NONE);
+					box.setText("提示");
+					box.setMessage("密码错误，请重新输入！");
+					box.open();
+					loginPW_text.setText("");
+					return;
+				}
+
+				// 登录成功
+				Index.currentOperator = operator;
+				MainMenu mainMenu = new MainMenu();
+				shell.close();
+				mainMenu.open();
+
 			}
 		});
 		login_operator.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 13, SWT.NORMAL));
@@ -87,11 +121,43 @@ public class LoginWindow {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				// 管理员登录按钮事件
+				String loginId = loginId_text.getText();
+				if (ManagerService.find(loginId) == null) {
+					MessageBox box = new MessageBox(shell, SWT.NONE);
+					box.setText("提示");
+					box.setMessage("该管理员不存在，请检查后重新输入！");
+					box.open();
+					loginId_text.setText("");
+					loginPW_text.setText("");
+					return;
+				}
+				Manager manager = ManagerService.find(loginId);
+				String pw = loginPW_text.getText();
+				if (!pw.equals(manager.getPassword())) {
+					MessageBox box = new MessageBox(shell, SWT.NONE);
+					box.setText("提示");
+					box.setMessage("密码错误，请重新输入！");
+					box.open();
+					loginPW_text.setText("");
+					return;
+				}
+
+				// 登录成功
+				Index.currentManager = manager;
+				MainMenu mainMenu = new MainMenu();
+				shell.close();
+				mainMenu.open();
+
 			}
 		});
 		login_manager.setText("管理员登录");
 		login_manager.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 13, SWT.NORMAL));
 		login_manager.setBounds(799, 548, 171, 52);
+
+		Label label_2 = new Label(shell, SWT.NONE);
+		label_2.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 30, SWT.NORMAL));
+		label_2.setBounds(401, 124, 485, 71);
+		label_2.setText("商品库存管理系统 - 欢迎");
 
 	}
 }

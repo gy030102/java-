@@ -4,49 +4,49 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import configuration.DBOperation;
-import model.Manager;
+import model.Operator;
 
-public class ManagerService {
-	public static void insert(Manager manager) {
+public class OperatorService {
+	public static void insert(Operator operator) {
 //		String idString = manager.getId();
 		// ....
-		String sql = "insert into `administratorinfo` values('" + manager.getId() + "','" + manager.getName() + "','"
-				+ manager.getPassword() + "')";
+		String sql = "insert into `operatorinfo` values('" + operator.getId() + "','" + operator.getName() + "','"
+				+ operator.getPassword() + "')";
 
 		DBOperation.update(sql);
 	}
 
 	public static void delete(String targetId) {
-		String sql = "delete from `administratorinfo` where `id`='" + targetId + "'";
+		String sql = "delete from `operatorinfo` where `id`='" + targetId + "'";
 		DBOperation.update(sql);
 	}
 
-	public static Manager find(String targetId) {
-		String sql = "select * from `administratorinfo` where `id` =  '" + targetId + "'";
+	public static Operator find(String targetId) {
+		String sql = "select * from `operatorinfo` where `id` =  '" + targetId + "'";
 		ResultSet resultSet = DBOperation.query(sql);
-		Manager manager = null;
+		Operator operator = null;
 		try {
 			while (resultSet.next()) {
 				String id = resultSet.getString("id");
 				String name = resultSet.getString("name");
 				String password = resultSet.getString("password");
-				manager = new Manager(id, name, password);
+				operator = new Operator(id, name, password);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("查找错误");
 		}
-		return manager;
+		return operator;
 	}
 
-	public static boolean update(Manager manager) {
+	public static boolean update(Operator operator) {
 		// 传入参数的id代表要更改的管理员，剩余字段如果不为null则代表进行更改
-		String targetId = manager.getId();
-		String newName = manager.getName();
-		String newPW = manager.getPassword();
+		String targetId = operator.getId();
+		String newName = operator.getName();
+		String newPW = operator.getPassword();
 
-		String basesql = "update `administratorinfo` set ";
+		String basesql = "update `operatorinfo` set ";
 		if (newName == null && newPW == null) {
 			return false;
 		}

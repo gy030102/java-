@@ -1,22 +1,24 @@
 package model;
 
 public class Goods {
+	//编号
 	private String id;
-
+	
+	//名称
 	private String name;
-
+	//数量
 	private int amount;
-
+	//类别
 	private String category;
-
+	//仓库编号
 	private String warehouse;
-
+	//价格
 	private float price;
-
+	//单位
 	private String unit;
-
+	//生产商
 	private String producer;
-
+	//备注
 	private String notes;
 
 	public String getId() {

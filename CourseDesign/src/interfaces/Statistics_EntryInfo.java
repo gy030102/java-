@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -21,7 +22,9 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.SWTResourceManager;
 
 import model.Entry;
+import model.Goods;
 import service.EntryService;
+import service.GoodsService;
 
 public class Statistics_EntryInfo {
 
@@ -87,6 +90,7 @@ public class Statistics_EntryInfo {
 			public void widgetSelected(SelectionEvent e) {
 				// 进行查询
 				List<String> criteria = new ArrayList<>();
+				// 如果有时间筛选条件
 				if (selectByTime.getSelection()) {
 					LocalDateTime queryStart = LocalDateTime.of(startDate.getYear(), startDate.getMonth() + 1,
 							startDate.getDay(), 0, 0, 0);
@@ -97,16 +101,36 @@ public class Statistics_EntryInfo {
 							+ queryEnd.format(formatter) + "'";
 					criteria.add(sql);
 				}
-				if (entryId_text.getText() != null && entryId_text.gette)
+				// 如果有单号筛选条件
+				if (entryId_text.getText() != null && !entryId_text.getText().trim().equals("")) {
+					criteria.add("`id` = '" + entryId_text.getText() + "'");
+				}
+				// 如果有货品名称筛选条件
+				if (goodname_text.getText() != null && !goodname_text.getText().trim().equals("")) {
+					List<Goods> candidateGoods = GoodsService.findByName(goodname_text.getText());
+					List<String> subCriteria = new ArrayList<>();
+					candidateGoods.forEach(good -> {
+						subCriteria.add("`good_id` = '" + good.getId() + "'");
+					});
+					criteria.add(subCriteria.stream().collect(Collectors.joining(" or ")));
+				}
 
-					table.removeAll();
-				// TODO 下面只是测试代码
-				List<TableItem> items = new ArrayList<>();
-//				for (int i = 0; i < 3; i++) {
-//					TableItem item = new TableItem(table, SWT.NONE);
-//					item.setText(new String[] { queryStart.toString(), "名称", String.valueOf(i) });
-//					items.add(item);
-//				}
+				// TODO 供货商选项框
+
+				// 总的筛选条件
+				String totalCriteria = criteria.stream().collect(Collectors.joining(" and "));
+
+				List<Entry> entries = EntryService.find(totalCriteria);
+
+				table.removeAll();
+
+				entries.forEach(en -> {
+					TableItem item = new TableItem(table, SWT.NONE);
+					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+					item.setText(new String[] { String.valueOf(en.getId()), en.getDate().format(formatter),
+							en.getGoodId(), String.valueOf(en.getAmount()), String.valueOf(en.getPrice()), null,
+							en.getOperatorId(), null, null, en.getNote() });
+				});
 
 			}
 		});

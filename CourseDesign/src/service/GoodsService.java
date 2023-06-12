@@ -2,6 +2,8 @@ package service;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import configuration.DBOperation;
 import model.Goods;
@@ -29,23 +31,28 @@ public class GoodsService {
 		Goods goods = null;
 		try {
 			while (resultSet.next()) {
-				String id = resultSet.getString("id");
-				String name = resultSet.getString("name");
-				int amount = resultSet.getInt("amount");
-				String category = resultSet.getString("category");
-				String warehouse = resultSet.getString("warehouse");
-				float price = resultSet.getFloat("price");
-				String unit = resultSet.getString("unit");
-				String producer = resultSet.getString("producer");
-				String note = resultSet.getString("note");
-				goods = new Goods(id, name, amount, category, warehouse, price, unit, producer, note);
+				goods = parseGoods(resultSet);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("查找错误");
+			System.out.println("goodservice:find查找错误");
 		}
 		return goods;
+	}
+
+	public static List<Goods> findByName(String targetName) {
+		String sql = "select * from `goodsinfo` where `name` = '" + targetName + "'";
+		ResultSet resultSet = DBOperation.query(sql);
+		List<Goods> targets = new ArrayList<>();
+		try {
+			while (resultSet.next()) {
+				targets.add(parseGoods(resultSet));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("goodservice:findbyname查找错误");
+		}
+		return targets;
 	}
 
 	public static boolean update(Goods goods) {
@@ -107,5 +114,18 @@ public class GoodsService {
 			flag = (flag == false) ? (result > 0) : true;
 		}
 		return flag;
+	}
+
+	private static Goods parseGoods(ResultSet resultSet) throws SQLException {
+		String id = resultSet.getString("id");
+		String name = resultSet.getString("name");
+		int amount = resultSet.getInt("amount");
+		String category = resultSet.getString("category");
+		String warehouse = resultSet.getString("warehouse");
+		float price = resultSet.getFloat("price");
+		String unit = resultSet.getString("unit");
+		String producer = resultSet.getString("producer");
+		String note = resultSet.getString("note");
+		return new Goods(id, name, amount, category, warehouse, price, unit, producer, note);
 	}
 }

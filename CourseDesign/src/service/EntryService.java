@@ -40,6 +40,22 @@ public class EntryService {
 		return entry;
 	}
 
+	public static List<Entry> find(String criteria) {
+		String sql = "select * from `Entry` where " + criteria;
+		ResultSet resultSet = DBOperation.query(sql);
+		List<Entry> entries = new ArrayList<>();
+		try {
+			while (resultSet.next()) {
+				entries.add(parseEntry(resultSet));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("entry.find:条件查找错误");
+		}
+		return entries;
+	}
+
 	public static List<Entry> findAll() {
 		String sql = "SELECT * FROM `Entry`";
 		ResultSet result = DBOperation.query(sql);

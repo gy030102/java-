@@ -36,12 +36,13 @@ public class EntryService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("entry.find:查找错误");
+			System.out.println("所使用的语句为：" + sql);
 		}
 		return entry;
 	}
 
 	public static List<Entry> find(String criteria) {
-		String sql = "select * from `Entry` where " + criteria;
+		String sql = "select * from `Entry` " + criteria;
 		ResultSet resultSet = DBOperation.query(sql);
 		List<Entry> entries = new ArrayList<>();
 		try {
@@ -52,6 +53,7 @@ public class EntryService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("entry.find:条件查找错误");
+			System.out.println("所使用的语句为：" + sql);
 		}
 		return entries;
 	}
@@ -69,6 +71,7 @@ public class EntryService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("entry.findAll:查找错误");
+			System.out.println("所使用的语句为：" + sql);
 		}
 
 		return entries;

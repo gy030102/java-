@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
@@ -96,6 +97,13 @@ public class Statistics_EntryInfo {
 							startDate.getDay(), 0, 0, 0);
 					LocalDateTime queryEnd = LocalDateTime.of(terminateDate.getYear(), terminateDate.getMonth() + 1,
 							terminateDate.getDay(), 23, 59, 59);
+					if (!queryStart.isBefore(queryEnd)) {
+						MessageBox messageBox = new MessageBox(shell);
+						messageBox.setText("提示");
+						messageBox.setMessage("输入的查询时间不合法，请检查后重新选择时间范围！");
+						messageBox.open();
+						return;
+					}
 					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 					String sql = "`entryDate` between '" + queryStart.format(formatter) + "' and '"
 							+ queryEnd.format(formatter) + "'";
@@ -112,18 +120,29 @@ public class Statistics_EntryInfo {
 					candidateGoods.forEach(good -> {
 						subCriteria.add("`good_id` = '" + good.getId() + "'");
 					});
-					criteria.add(subCriteria.stream().collect(Collectors.joining(" or ")));
+					if (subCriteria.size() > 0) {
+						criteria.add(subCriteria.stream().collect(Collectors.joining(" or ")));
+					}
+
 				}
 
 				// TODO 供货商选项框
+				if (supplierSelector.getText() != null && !supplierSelector.getText().trim().equals("")) {
+
+				}
 
 				// 总的筛选条件
 				String totalCriteria = criteria.stream().collect(Collectors.joining(" and "));
+				// 为了防止条件全为空，需要在这里判断一下，如果有条件直接在头上加上where
+				if (totalCriteria.length() > 0) {
+					totalCriteria = " where " + totalCriteria;
+				}
 
+				System.out.println(totalCriteria);
 				List<Entry> entries = EntryService.find(totalCriteria);
 
 				table.removeAll();
-
+				// TODO 等到校验员等类写好了再完善此处的属性
 				entries.forEach(en -> {
 					TableItem item = new TableItem(table, SWT.NONE);
 					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -233,7 +252,9 @@ public class Statistics_EntryInfo {
 		queryAllBtn.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				table.removeAll();
 				// 查询全部
+				// TODO 等到校验员等类写好了再完善此处的属性
 				List<Entry> entries = EntryService.findAll();
 				entries.forEach(en -> {
 					TableItem item = new TableItem(table, SWT.NONE);

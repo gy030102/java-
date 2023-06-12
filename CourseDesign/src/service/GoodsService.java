@@ -41,7 +41,8 @@ public class GoodsService {
 	}
 
 	public static List<Goods> findByName(String targetName) {
-		String sql = "select * from `goodsinfo` where `name` = '" + targetName + "'";
+		// 用名称查找时，默认为模糊查询
+		String sql = "select * from `goodsinfo` where `name` like '%" + targetName + "%'";
 		ResultSet resultSet = DBOperation.query(sql);
 		List<Goods> targets = new ArrayList<>();
 		try {

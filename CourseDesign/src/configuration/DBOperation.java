@@ -42,9 +42,22 @@ public class DBOperation {
 		return res;
 	}
 
-	// 构造时建立连接
+	// 构造时建立连接 TODO 最后把这个恢复
 //	public DBOperation()
-	public static void init() {
+//	public static void init() {
+//		try {
+//			Class.forName(DRIVERNAME);
+//			connection = DriverManager.getConnection(CONNECTION_URL, DBUSER_ID, DBPASSWORD);
+//			statement = connection.createStatement();
+//			statement.executeUpdate("use goodsinventory");
+//		} catch (ClassNotFoundException | SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
+
+	// TODO 这个是测试的时候用的，最后去掉，改用init()
+	static {
 		try {
 			Class.forName(DRIVERNAME);
 			connection = DriverManager.getConnection(CONNECTION_URL, DBUSER_ID, DBPASSWORD);

@@ -1,24 +1,24 @@
 package model;
 
 public class Goods {
-	//编号
+	// 编号
 	private String id;
-	
-	//名称
+
+	// 名称
 	private String name;
-	//数量
+	// 数量
 	private int amount;
-	//类别
+	// 类别
 	private String category;
-	//仓库编号
+	// 仓库编号
 	private String warehouse;
-	//价格
+	// 价格
 	private float price;
-	//单位
+	// 单位
 	private String unit;
-	//生产商
+	// 生产商
 	private String producer;
-	//备注
+	// 备注
 	private String notes;
 
 	public String getId() {
@@ -93,14 +93,15 @@ public class Goods {
 		this.notes = note;
 	}
 
-	public Goods(String id, String name, int amount, String category, String warehouse, float price, String producer,
-			String notes) {
+	public Goods(String id, String name, int amount, String category, String warehouse, float price, String unit,
+			String producer, String notes) {
 		this.id = id;
 		this.name = name;
 		this.amount = amount;
 		this.category = category;
 		this.warehouse = warehouse;
 		this.price = price;
+		this.unit = unit;
 		this.producer = producer;
 		this.notes = notes;
 	}

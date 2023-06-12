@@ -12,8 +12,8 @@ public class GoodsService {
 		// ....
 		String sql = "insert into `goodsinfo` values('" + goods.getId() + "','" + goods.getName() + "','"
 				+ goods.getAmount() + "','" + goods.getCategory() + "','" + goods.getWarehouse() + "','"
-				+ goods.getPrice() + "','" + goods.getUnit() + "','" + goods.getProducer() + "','" + goods.getNote()
-				+ "')";
+				+ String.valueOf(goods.getPrice()) + "','" + goods.getUnit() + "','" + goods.getProducer() + "','"
+				+ goods.getNote() + "')";
 
 		DBOperation.update(sql);
 	}

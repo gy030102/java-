@@ -61,7 +61,7 @@ public class Goods {
 		this.warehouse = warehouse;
 	}
 
-	public float setPrice() {
+	public float getPrice() {
 		return price;
 	}
 

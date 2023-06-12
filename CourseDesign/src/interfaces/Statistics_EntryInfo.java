@@ -218,7 +218,7 @@ public class Statistics_EntryInfo {
 
 		Label label_2 = new Label(shell, SWT.NONE);
 		label_2.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 20, SWT.NORMAL));
-		label_2.setBounds(494, 10, 240, 52);
+		label_2.setBounds(532, 10, 240, 52);
 		label_2.setText("入库记录查询");
 
 		Label label_3 = new Label(shell, SWT.SEPARATOR | SWT.HORIZONTAL);
